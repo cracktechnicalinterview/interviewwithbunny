@@ -46,7 +46,7 @@
           style="font-size: 50px"
         >
           <i class="flaticon-043-teddy-bear"></i>
-          <span class="text-primary">KidKinder</span>
+          <span class="text-primary">Interview With Bunny</span>
         </a>
         <button
           type="button"
@@ -60,92 +60,94 @@
           class="collapse navbar-collapse justify-content-between"
           id="navbarCollapse"
         >
-          <div class="navbar-nav font-weight-bold mx-auto py-0">
-            <a href="index.html" class="nav-item nav-link">Home</a>
-            <a href="about.html" class="nav-item nav-link active">About</a>
-            <a href="class.html" class="nav-item nav-link">Classes</a>
-            <a href="team.html" class="nav-item nav-link">Teachers</a>
-            <a href="gallery.html" class="nav-item nav-link">Gallery</a>
-            <div class="nav-item dropdown">
-              <a
-                href="#"
-                class="nav-link dropdown-toggle"
-                data-toggle="dropdown"
-                >Pages</a
-              >
-              <div class="dropdown-menu rounded-0 m-0">
-                <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                <a href="single.html" class="dropdown-item">Blog Detail</a>
-              </div>
-            </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
-          </div>
           <a href="" class="btn btn-primary px-4">Join Class</a>
         </div>
       </nav>
     </div>
     <!-- Navbar End -->
 
-    <!-- Header Start -->
-    <div class="container-fluid bg-primary mb-5">
-      <div
-        class="d-flex flex-column align-items-center justify-content-center"
-        style="min-height: 400px"
-      >
-        <h3 class="display-3 font-weight-bold text-white">About Us</h3>
-        <div class="d-inline-flex text-white">
-          <p class="m-0"><a class="text-white" href="">Home</a></p>
-          <p class="m-0 px-2">/</p>
-          <p class="m-0">About Us</p>
-        </div>
-      </div>
-    </div>
     <!-- Header End -->
 
     <!-- About Start -->
     <div class="container-fluid py-5">
       <div class="container">
         <div class="row align-items-center">
-          <div class="col-lg-5">
-            <img
-              class="img-fluid rounded mb-5 mb-lg-0"
-              src="img/about-1.jpg"
-              alt=""
-            />
-          </div>
-          <div class="col-lg-7">
+          <div class="col-lg-12">
             <p class="section-title pr-5">
-              <span class="pr-2">Learn About Us</span>
+              <span class="pr-2">Problem Statement</span>
             </p>
-            <h1 class="mb-4">Best School For Your Kids</h1>
+            <h1 class="mb-4 pr-2">Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+              Notice that the solution set must not contain duplicate triplets.</h1>
             <p>
-              Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo
-              dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo.
-              Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est
-              dolor
+              The algorithm to find all triplets in an integer array nums whose sum is zero and avoid duplicate triplets is based on the two-pointers approach and is similar to the Python solution provided earlier. Here's the step-by-step explanation:
+
+1.Sort the input array nums in ascending order. Sorting helps in efficiently finding unique triplets and also allows us to use the two-pointers approach.
+2. Initialize an empty list result to store the unique triplets.
+3.Iterate through the sorted array nums using a for loop. At each iteration, fix the first element (nums[i]) and use two pointers (left and right) to find the pair of elements whose sum is the negation of the fixed element (i.e., -nums[i]).
+4. Avoid duplicates while iterating and finding triplets. Skip equal elements to avoid duplicate triplets in the result.
+5. Add the unique triplet [nums[i], nums[left], nums[right]] to the result list whenever a triplet is found.
+6. Repeat steps 3 to 5 until all possible triplets have been examined.
+Now let's write the Java code for this algorithm:
+
+<code>
+  import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class ThreeSum {
+
+    public static List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums); // Step 1: Sort the array in ascending order
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue; // Step 4: Skip duplicates
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+                int total = nums[i] + nums[left] + nums[right];
+
+                if (total < 0) {
+                    left++;
+                } else if (total > 0) {
+                    right--;
+                } else {
+                    // Step 5: Found a triplet with sum 0, add it to the result
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+
+                    // Step 4: Skip duplicates
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+
+                    left++;
+                    right--;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {-1, 0, 1, 2, -1, -4};
+        List<List<Integer>> triplets = threeSum(nums);
+
+        for (List<Integer> triplet : triplets) {
+            System.out.println(triplet);
+        }
+    }
+}
+
+</code>
             </p>
             <div class="row pt-2 pb-4">
               <div class="col-6 col-md-4">
-                <img class="img-fluid rounded" src="img/about-2.jpg" alt="" />
+                This Java code will find all unique triplets whose sum is zero from the given array nums and print the result. The time complexity of this solution is O(n^2) due to the nested loops. Sorting the array initially takes O(n*log(n)) time.
               </div>
-              <div class="col-6 col-md-8">
-                <ul class="list-inline m-0">
-                  <li class="py-2 border-top border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Labore eos amet
-                    dolor amet diam
-                  </li>
-                  <li class="py-2 border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Etsea et sit
-                    dolor amet ipsum
-                  </li>
-                  <li class="py-2 border-bottom">
-                    <i class="fa fa-check text-primary mr-3"></i>Diam dolor diam
-                    elitripsum vero.
-                  </li>
-                </ul>
-              </div>
+              
             </div>
-            <a href="" class="btn btn-primary mt-2 py-2 px-4">Learn More</a>
           </div>
         </div>
       </div>
